@@ -1,0 +1,157 @@
+// Card Constructor
+function CardConstructor (suit,number){
+    var Suit = suit;
+    var Num = number;
+    
+    this.getNumber = function(){
+        return Num;
+    };
+    this.getSuit = function(){
+        return Suit;
+    };
+    
+    this.getValue = function(){
+        if(Num > 10){
+            return 10;
+        }
+        if(Num === 1){
+            return 11;
+        }
+        else
+            return Num;
+    };
+}
+
+var deal = function(){
+    this.NewSuit = Math.floor( Math.random()*4 + 1); 
+    this.NewNum = Math.floor( Math.random()*13 + 1);
+    
+    return new CardConstructor(this.NewSuit, this.NewNum); 
+};
+
+var Hand = function (){
+    var card1 = deal();
+    var card2 = deal();
+    var holdcards = [card1, card2];
+    
+    this.score = function(){
+        var sum = 0;
+        var ace = 0;
+        
+        for(var i = 0; i < holdcards.length; i++){
+            if (holdcards[i].getValue()===11) {
+                ace += 1;
+            }
+            sum+=holdcards[i].getValue();
+            while (sum > 21 && ace > 0) {
+                sum -= 10;
+                ace -=1;}
+        }    
+        return sum;
+    };
+    
+    this.printHand = function(){
+        var string = "";
+        for(var j = 0; j < holdcards.length; j++){
+            
+            var cardpicked = holdcards[j].getNumber();
+            var newsuit =  holdcards[j].getSuit();
+            
+            var numdis = "";
+            var suitdis = "";
+            
+            switch(cardpicked){
+                case 11:
+                    numdis = "Jack";
+                    break;
+                case 12:
+                    numdis = "Queen";
+                    break;
+                case 13:
+                    numdis = "King";
+                    break;
+                default:
+                    numdis = cardpicked;
+            }
+            
+            switch(newsuit){
+                case 1:
+                    suitdis = "HEARTS";
+                    break;
+                case 2:
+                    suitdis = "SPADES";
+                    break;
+                case 3:
+                    suitdis = "DIAMONDS";
+                    break;
+                default:
+                    suitdis = "CLOVERS";
+            }
+            
+            string = string + numdis + " "+ suitdis +" , ";
+        }
+        return string;
+    };
+
+    this.hitMe = function() {
+        holdcards[holdcards.length] = deal();
+    };
+};
+
+var playAsDealer = function(){
+    var hand = new Hand();
+    
+    while(hand.score() < 17){
+        hand.hitMe();
+    }
+    return hand;
+};
+
+var playAsUser = function(){
+   var hand = new Hand();
+    
+    while (hand.score() < 21 && confirm(hand.printHand()+". Do you want a new card?")) {
+        hand.hitMe();
+    }
+    return hand;
+};
+
+var declareWinner = function (userHand, dealerHand){
+    
+    var u = userHand.score();
+    var d = dealerHand.score();
+    
+    if(u > 21){
+        if (d > 21){
+            return "tie";     
+        }
+        else{
+            return "lose because only you busted";
+        }
+    }
+    
+    else if(d > 21){
+        return "win";
+    }
+    
+    else if(u> d){
+        return "win";
+    }
+    
+    else if(u === d){
+        return "tie";
+    }
+    
+    else{
+        return "lose";
+    }
+};
+
+var playGame = function(){
+    //playAsUser();
+    //playAsDealer();
+    alert(declareWinner(playAsUser(),playAsDealer()));
+};
+
+alert("Welcome to the Black Jack Game");
+playGame();

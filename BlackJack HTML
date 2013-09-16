@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BlackJack Game</title>
+        <link rel = "stylesheet" href = "style.css" />
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+    <body>
+        <h1>Welcome To The BlackJack Game</h1>
+        <ul>
+            <li><a href='http://www.google.com' onclick='playGame();'>Start Game</a></li>
+            <li><a href = 'http://en.wikipedia.org/wiki/Blackjack'>About Blackjack</a></li>
+        </ul>
+        <p1>Developed by Yasser M. Itani</p1>
+    </body>
+</html>

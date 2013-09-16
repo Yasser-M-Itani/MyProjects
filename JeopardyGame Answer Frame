@@ -1,0 +1,46 @@
+package Jeopardy;
+
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class AnswerWindow1001 extends JDialog{
+	
+	JLabel label;
+	public JButton button1001;
+	Boolean button1001Op = false;
+	
+	public AnswerWindow1001 (JFrame frame){
+		super(frame, "Question 1001", true);
+		setLayout(new GridLayout(2,1));
+		
+		label = new JLabel("Question for 100 of Category 1");
+		label.setFont(new Font("Times New Roman",Font.BOLD,40));
+				
+		JPanel p1001 = new JPanel();
+		p1001.add(button1001 = new JButton("Answer!"));
+		
+		frame.add(label);
+		frame.add(p1001);
+		
+		add(label);
+		add(p1001);
+		
+		button1001.addActionListener(new One());
+	}
+	
+	public class One implements ActionListener{
+		public void actionPerformed (ActionEvent e){
+				button1001Op = true;
+				label.setText("Answer for 100 of Category 1");
+		}
+	}
+}

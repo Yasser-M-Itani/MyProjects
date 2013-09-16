@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Calculator</title>
+        <form name="calc" method="POST">
+            Enter Num 1: <input type=text name=num1><br>
+            Enter Num 2: <input type=text name=num2><br><br>
+            Select Operation: 
+                <input type=radio name=op value="add">Addition 
+                <input type=radio name=op value="sub">Subtraction 
+                <input type=radio name=op value="div">Division 
+                <input type=radio name=op value="mult">Multiplication</input><br><br>
+                
+            <input type=submit value="Calculate">
+        </form>
+    </head>
+        <?php
+            
+            class calculator{
+                
+                var $num1;
+                var $num2;
+                
+                function addition ($num1, $num2){
+                    $sum = $num1 + $num2;
+                    echo ("$num1  +  $num2  =  $sum");
+                }
+                
+                function subtraction ($num1, $num2){
+                    $difference = $num1 - $num2;
+                    echo ("$num1  -  $num2  =  $difference");
+                }
+                
+                function multiplication ($num1, $num2){
+                    $product = $num1 * $num2;
+                    echo ("$num1  *  $num2  =  $product");
+                }
+                
+                function division ($num1, $num2){
+                    $divident = $num1 / $num2;
+                    echo ("$num1  /  $num2  =  $divident");
+                }  
+            }
+            
+            $calculator = new calculator();
+            
+            $num1 = $_POST['num1'];
+            $num2 = $_POST['num2'];
+            $op = $_POST['op'];
+            
+            if ($op == "add")
+                $calculator->addition($num1, $num2);
+            if($op == "sub")
+                $calculator->subtraction($num1,$num2);
+            if($op == "mult")
+                $calculator->multiplication($num1,$num2);
+            if($op == "div")
+                $calculator->division($num1, $num2);
+        ?>
+</html>
